@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 260aed23cae176a47b988f42a2d4725a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Danzza
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 675585a9f6aff874a8ad57a93def17b5, type: 3}
+  - {fileID: 12800000, guid: 787782e8987eb984ea5ef1ecc0b5b2dd, type: 3}
+  - {fileID: 12800000, guid: 4084c3ad070f2a7429fe234b25536a76, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
