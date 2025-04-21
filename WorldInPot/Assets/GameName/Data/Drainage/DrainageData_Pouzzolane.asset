@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f246ab6d67cd734181f13172747a11e, type: 3}
+  m_Name: DrainageData_Pouzzolane
+  m_EditorClassIdentifier: 
+  <drainageName>k__BackingField: Pouzzolane
+  drainageMaterial: {fileID: 2100000, guid: dce8543f2e948b14e92a129927f3de18, type: 2}
+  drainageIcon: {fileID: 0}

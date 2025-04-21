@@ -4,8 +4,7 @@ using NaughtyAttributes;
 
 public class CameraManager : SingletonMono<CameraManager>
 {
-    [Header("Terraium Holder")]
-    public Transform terrariumHolder;
+    private GameHandler gameHandler;
 
     [Header("Client")]
     public CinemachineCamera cameraClient;
@@ -13,6 +12,7 @@ public class CameraManager : SingletonMono<CameraManager>
     [Header("Terrarium")]
     public CinemachineCamera cameraTerrarium;
     public CinemachineOrbitalFollow cameraOrbitalFollow;
+    public Transform terrariumHolder;
 
     [Header("UI")]
     public Canvas terrariumUI;
@@ -21,59 +21,24 @@ public class CameraManager : SingletonMono<CameraManager>
     [Header("Parameter")]
     [SerializeField] private float scrollSensibility = 10f;
     [SerializeField] private Vector2 dragSensibility = new Vector2(0.1f, 0.1f);
-    [SerializeField] private bool inTerrariumMode = true;
 
-    public bool InTerrariumMode
+    protected override void Awake()
     {
-        get => inTerrariumMode;
-        set
-        {
-            inTerrariumMode = value;
-            if (inTerrariumMode)
-            {
-                FocusOnTerrarium();
-            }
-            else
-            {
-                FocusOnClient();
-            }
-        }
+        base.Awake();
+        gameHandler = GameHandler.Instance;
     }
-
-    void Start()
+    private void Update()
     {
-        InTerrariumMode = inTerrariumMode;
-    }
+        if (!gameHandler.InTerrariumMode) return;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            inTerrariumMode = !inTerrariumMode;
-            if (inTerrariumMode)
-            {
-                FocusOnTerrarium();
-            }
-            else
-            {
-                FocusOnClient();
-            }
-        }
-    }
+        //If not right click, return
+        if (!Input.GetMouseButton(1)) return;
 
-    public void LateUpdate()
-    {
-        if (!InTerrariumMode) return;
+        terrariumHolder.RotateAround(terrariumHolder.position, Vector3.up, -Input.mousePositionDelta.x * dragSensibility.x * Time.deltaTime);
 
-        //Move Camera on drag
-        if (Input.GetMouseButton(1))
-        {
-            terrariumHolder.RotateAround(terrariumHolder.position, Vector3.up, -Input.mousePositionDelta.x * dragSensibility.x * Time.deltaTime);
-
-            cameraOrbitalFollow.VerticalAxis.Value += Input.mousePositionDelta.y * dragSensibility.y * Time.deltaTime;
-            cameraOrbitalFollow.VerticalAxis.Value = cameraOrbitalFollow.VerticalAxis.GetClampedValue();
-            cameraOrbitalFollow.VerticalAxis.TrackValueChange();
-        }
+        cameraOrbitalFollow.VerticalAxis.Value += Input.mousePositionDelta.y * dragSensibility.y * Time.deltaTime;
+        cameraOrbitalFollow.VerticalAxis.Value = cameraOrbitalFollow.VerticalAxis.GetClampedValue();
+        cameraOrbitalFollow.VerticalAxis.TrackValueChange();
 
         //Zoom Camera on scroll
         if (Input.mouseScrollDelta.magnitude != 0)
@@ -81,9 +46,9 @@ public class CameraManager : SingletonMono<CameraManager>
             cameraOrbitalFollow.RadialAxis.Value += Input.mouseScrollDelta.y * scrollSensibility * Time.deltaTime;
             cameraOrbitalFollow.RadialAxis.Value = cameraOrbitalFollow.RadialAxis.GetClampedValue();
         }
+
     }
 
-    [Button]
     public void FocusOnTerrarium()
     {
         cameraTerrarium.gameObject.SetActive(true);
@@ -93,7 +58,6 @@ public class CameraManager : SingletonMono<CameraManager>
         terrariumUI.gameObject.SetActive(true);
         clientUI.gameObject.SetActive(false);
     }
-    [Button]
     public void FocusOnClient()
     {
         cameraClient.gameObject.SetActive(true);

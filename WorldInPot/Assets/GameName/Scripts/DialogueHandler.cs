@@ -13,10 +13,8 @@ public class DialogueHandler : MonoBehaviour
     private TextAsset inkJSONAsset = null;
     public Story story;
 
-    [SerializeField]
-    private Canvas canvas = null;
-    private RectTransform DialogueArea = null;
-    private RectTransform ChoiceArea = null;
+    public RectTransform DialogueArea = null;
+    public RectTransform ChoiceArea = null;
 
     // UI Prefabs
     [SerializeField]
@@ -101,12 +99,12 @@ public class DialogueHandler : MonoBehaviour
         choice.transform.SetParent(ChoiceArea.transform, false);
 
         // Gets the text from the button prefab
-        Text choiceText = choice.GetComponentInChildren<Text>();
+        TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI>();
         choiceText.text = text;
 
         // Make the button expand to fit the text
-        HorizontalLayoutGroup layoutGroup = choice.GetComponent<HorizontalLayoutGroup>();
-        layoutGroup.childForceExpandHeight = false;
+        //HorizontalLayoutGroup layoutGroup = choice.GetComponent<HorizontalLayoutGroup>();
+        //layoutGroup.childForceExpandHeight = false;
 
         return choice;
     }

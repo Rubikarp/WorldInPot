@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59993f1dbda7aa449f46edc8d25f2d4, type: 3}
+  m_Name: SubstratData_RiverSand
+  m_EditorClassIdentifier: 
+  <substratName>k__BackingField: RiverSand
+  substratMaterial: {fileID: 2100000, guid: 00eb2e85dc717474eb77e625c330222c, type: 2}
+  substratIcon: {fileID: 0}
