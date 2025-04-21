@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <substratName>k__BackingField: Terre
   substratMaterial: {fileID: 2100000, guid: 3618555260c72684cb9fcabe94096897, type: 2}
-  substratIcon: {fileID: 0}
+  substratIcon: {fileID: 21300000, guid: 182424c8f5bd78e44ae1e1c24699e344, type: 3}

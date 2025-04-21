@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <filterName>k__BackingField: Sand
   filterMaterial: {fileID: 2100000, guid: 6c4106af048fcd54e97a64eae1307485, type: 2}
-  filterIcon: {fileID: 0}
+  filterIcon: {fileID: 21300000, guid: 6958964035279624396c320052506613, type: 3}

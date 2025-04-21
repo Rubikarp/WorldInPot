@@ -3,116 +3,130 @@ using TMPro;
 using Ink.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 public class DialogueHandler : MonoBehaviour
 {
     public static event Action<Story> OnCreateStory;
     public static event Action OnStoryEnd;
 
-    [SerializeField]
-    private TextAsset inkJSONAsset = null;
-    public Story story;
+    [Header("Story Configuration")]
+    public TextAsset inkJSONAsset = null;
 
-    public RectTransform DialogueArea = null;
-    public RectTransform ChoiceArea = null;
+    [Header("UI References")]
+    [SerializeField, Required]
+    private RectTransform dialogueArea = null;
+    
+    [SerializeField, Required]
+    private RectTransform choiceArea = null;
 
-    // UI Prefabs
-    [SerializeField]
+    [Header("UI Prefabs")]
+    [SerializeField, Required]
     private TextMeshProUGUI textPrefab = null;
-    [SerializeField]
+    
+    [SerializeField, Required]
     private Button buttonPrefab = null;
+    private Story story;
 
-    void Awake()
+    [Button]
+    public void StartStory()
     {
-        // Remove the default message
-        RemoveChildren();
-        StartStory();
-    }
+        if (inkJSONAsset == null)
+        {
+            Debug.LogError("No Ink JSON asset assigned to DialogueHandler!");
+            return;
+        }
 
-    // Creates a new Story object with the compiled story which we can then play!
-    void StartStory()
-    {
-        story = new Story(inkJSONAsset.text);
-        if (OnCreateStory != null) OnCreateStory(story);
+        ClearUI();
+        InitializeStory();
         RefreshView();
     }
-
-    // This is the main function called every time the story changes. It does a few things:
-    // Destroys all the old content and choices.
-    // Continues over all the lines of text, then displays all the choices. If there are no choices, the story is finished!
-    void RefreshView()
+    private void InitializeStory()
     {
-        // Remove all the UI on screen
-        RemoveChildren();
+        try
+        {
+            story = new Story(inkJSONAsset.text);
+            OnCreateStory?.Invoke(story);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to initialize story: {e.Message}");
+        }
+    }
 
-        // Read all the content until we can't continue any more
+    private void RefreshView()
+    {
+        if (story == null) return;
+
+        DisplayStoryText();
+        DisplayChoices();
+    }
+
+    private void DisplayStoryText()
+    {
         while (story.canContinue)
         {
-            // Continue gets the next line of the story
-            string text = story.Continue();
-            // This removes any white space from the text.
-            text = text.Trim();
-            // Display the text on screen!
-            CreateContentView(text);
+            string text = story.Continue().Trim();
+            CreateDialogueText(text);
         }
+    }
 
-        // Display all the choices, if there are any!
+    private void DisplayChoices()
+    {
         if (story.currentChoices.Count > 0)
         {
-            for (int i = 0; i < story.currentChoices.Count; i++)
+            foreach (var choice in story.currentChoices)
             {
-                Choice choice = story.currentChoices[i];
-                Button button = CreateChoiceView(choice.text.Trim());
-                // Tell the button what to do when we press it
-                button.onClick.AddListener(delegate {
-                    OnClickChoiceButton(choice);
-                });
+                CreateChoiceButton(choice);
             }
         }
-        // If we've read all the content and there's no choices, the story is finished!
         else
         {
             OnStoryEnd?.Invoke();
         }
     }
 
-    // When we click the choice button, tell the story to choose that choice!
-    void OnClickChoiceButton(Choice choice)
+    private void CreateDialogueText(string text)
     {
+        if (textPrefab == null || dialogueArea == null) return;
+
+        var storyText = Instantiate(textPrefab, dialogueArea);
+        storyText.text = text;
+    }
+
+    private void CreateChoiceButton(Choice choice)
+    {
+        if (buttonPrefab == null || choiceArea == null) return;
+
+        var button = Instantiate(buttonPrefab, choiceArea);
+        var choiceText = button.GetComponentInChildren<TextMeshProUGUI>();
+        
+        if (choiceText != null)
+        {
+            choiceText.text = choice.text.Trim();
+        }
+
+        button.onClick.AddListener(() => OnChoiceSelected(choice));
+    }
+
+    private void OnChoiceSelected(Choice choice)
+    {
+        if (story == null) return;
+
         story.ChooseChoiceIndex(choice.index);
         RefreshView();
     }
 
-    // Creates a textbox showing the the line of text
-    void CreateContentView(string text)
+    private void ClearUI()
     {
-        TextMeshProUGUI storyText = Instantiate(textPrefab) as TextMeshProUGUI;
-        storyText.text = text;
-        storyText.transform.SetParent(DialogueArea.transform, false);
-    }
-
-    // Creates a button showing the choice text
-    Button CreateChoiceView(string text)
-    {
-        // Creates the button from a prefab
-        Button choice = Instantiate(buttonPrefab) as Button;
-        choice.transform.SetParent(ChoiceArea.transform, false);
-
-        // Gets the text from the button prefab
-        TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI>();
-        choiceText.text = text;
-
-        // Make the button expand to fit the text
-        //HorizontalLayoutGroup layoutGroup = choice.GetComponent<HorizontalLayoutGroup>();
-        //layoutGroup.childForceExpandHeight = false;
-
-        return choice;
-    }
-
-    // Destroys all the children of this gameobject (all the UI)
-    void RemoveChildren()
-    {
-        ChoiceArea.DeleteChildrens();
-        DialogueArea.DeleteChildrens();
+        if (choiceArea != null)
+        {
+            choiceArea.DeleteChildrens();
+        }
+        
+        if (dialogueArea != null)
+        {
+            dialogueArea.DeleteChildrens();
+        }
     }
 }

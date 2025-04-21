@@ -5,9 +5,8 @@ public class VegetationButton : LayerButton
 {
     [SerializeField] private VegetationData vegetationData;
 
-    protected override void Awake()
+    protected override void LoadButtonData()
     {
-        base.Awake();
         if (iconImage != null && vegetationData != null)
         {
             iconImage.sprite = vegetationData.vegetationIcon;

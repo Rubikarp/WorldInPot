@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <filterName>k__BackingField: Carbon
   filterMaterial: {fileID: 2100000, guid: 833441edfc97d3448a75bab20253ab13, type: 2}
-  filterIcon: {fileID: 0}
+  filterIcon: {fileID: 21300000, guid: 4f9246a9d123c354aaac2ce0f2c555db, type: 3}

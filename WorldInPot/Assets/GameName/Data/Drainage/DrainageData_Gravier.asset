@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <drainageName>k__BackingField: Gravier
   drainageMaterial: {fileID: 2100000, guid: 2be04caa6ce74194fbc3318b606fb17b, type: 2}
-  drainageIcon: {fileID: 0}
+  drainageIcon: {fileID: 21300000, guid: e69de168982e22543a59619d130de748, type: 3}

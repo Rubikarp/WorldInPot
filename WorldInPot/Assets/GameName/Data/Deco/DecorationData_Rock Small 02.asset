@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fdccace4344e849a69e3c163189835, type: 3}
+  m_Name: DecorationData_Rock Small 02
+  m_EditorClassIdentifier: 
+  <decorationName>k__BackingField: Rock Small 02
+  decorationPrefab: {fileID: 3056186531873106824, guid: 9d2f49383fb3b514b8514a0a4a180fbe, type: 3}
+  decorationType: 0
+  structureIcon: {fileID: 21300000, guid: 4cc2d95ebf5265042ab88b090952d63a, type: 3}
+  decorationMesh: {fileID: -3115697924013626580, guid: 1f9d8b5b00c88e843a9aceb72be81953, type: 3}

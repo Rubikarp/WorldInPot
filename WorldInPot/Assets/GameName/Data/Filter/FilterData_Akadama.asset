@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <filterName>k__BackingField: Akadama
   filterMaterial: {fileID: 2100000, guid: 7b7045926a80708488a2dde58ddf2409, type: 2}
-  filterIcon: {fileID: 0}
+  filterIcon: {fileID: 21300000, guid: 9ff9433e22cd77a4e830f22d16af73fd, type: 3}

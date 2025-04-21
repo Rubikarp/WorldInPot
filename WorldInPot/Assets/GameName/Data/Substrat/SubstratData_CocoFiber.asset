@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <substratName>k__BackingField: CocoFiber
   substratMaterial: {fileID: 2100000, guid: e581c028fa165ae4c87b1e036291e618, type: 2}
-  substratIcon: {fileID: 0}
+  substratIcon: {fileID: 21300000, guid: 02ec44ab243c27449a39118155b731d5, type: 3}

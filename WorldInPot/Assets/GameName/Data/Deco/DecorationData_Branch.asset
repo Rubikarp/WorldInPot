@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fdccace4344e849a69e3c163189835, type: 3}
+  m_Name: DecorationData_Branch
+  m_EditorClassIdentifier: 
+  <decorationName>k__BackingField: Branch
+  decorationPrefab: {fileID: 686515291578967633, guid: 74b12682f81a5614781e2978adfef316, type: 3}
+  decorationType: 0
+  structureIcon: {fileID: 21300000, guid: 8736f0e34df56f04a8a7254467e1cdaa, type: 3}
+  decorationMesh: {fileID: 571416741228946723, guid: c114fa19aed2cc14bbf281936b812d1d, type: 3}

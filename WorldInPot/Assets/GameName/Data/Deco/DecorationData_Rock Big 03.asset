@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fdccace4344e849a69e3c163189835, type: 3}
+  m_Name: DecorationData_Rock Big 03
+  m_EditorClassIdentifier: 
+  <decorationName>k__BackingField: Rock Big 03
+  decorationPrefab: {fileID: 8999886025107768123, guid: 06da5c6531533b24ea719a701454be5a, type: 3}
+  decorationType: 0
+  structureIcon: {fileID: 21300000, guid: 4cc2d95ebf5265042ab88b090952d63a, type: 3}
+  decorationMesh: {fileID: 1500417894664506086, guid: a22161191dd5d714a91de5f9827700d9, type: 3}

@@ -4,13 +4,14 @@ using UnityEngine.UI;
 public class SubstratButton : LayerButton
 {
     [SerializeField] private SubstratData substratData;
+    protected override void Awake() => LoadButtonData();
 
-    protected override void Awake()
+    protected override void LoadButtonData()
     {
-        base.Awake();
         if (iconImage != null && substratData != null)
         {
             iconImage.sprite = substratData.substratIcon;
+            iconImage.enabled = true;
         }
         if (nameText != null && substratData != null)
         {

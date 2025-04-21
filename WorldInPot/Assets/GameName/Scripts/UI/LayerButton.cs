@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 public abstract class LayerButton : MonoBehaviour
 {
     [SerializeField] protected Button button;
+    [SerializeField] protected Image buttonImage;
     [SerializeField] protected Image iconImage;
     [SerializeField] protected TextMeshProUGUI nameText;
 
@@ -13,11 +15,23 @@ public abstract class LayerButton : MonoBehaviour
         if (button == null)
             button = GetComponent<Button>();
         
+        if(buttonImage == null)
+            buttonImage = GetComponent<Image>();
+
         if (iconImage == null)
-            iconImage = GetComponent<Image>();
+            iconImage = GetComponentInChildren<Image>();
 
         if (nameText == null)
             nameText = GetComponentInChildren<TextMeshProUGUI>();
+
+        LoadButtonData();
+    }
+
+    [Button]
+    protected virtual void LoadButtonData()
+    {
+        // Base implementation does nothing
+        // Derived classes should override this to load their specific data
     }
 
     protected virtual void OnEnable()

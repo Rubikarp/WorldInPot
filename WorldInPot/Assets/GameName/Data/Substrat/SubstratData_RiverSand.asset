@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <substratName>k__BackingField: RiverSand
   substratMaterial: {fileID: 2100000, guid: 00eb2e85dc717474eb77e625c330222c, type: 2}
-  substratIcon: {fileID: 0}
+  substratIcon: {fileID: 21300000, guid: 660b480b749083b489b447a249cbbc5f, type: 3}

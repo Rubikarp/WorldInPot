@@ -4,13 +4,14 @@ using UnityEngine.UI;
 public class DrainageButton : LayerButton
 {
     [SerializeField] private DrainageData drainageData;
+    protected override void Awake() => LoadButtonData();
 
-    protected override void Awake()
+    protected override void LoadButtonData()
     {
-        base.Awake();
         if (iconImage != null && drainageData != null)
         {
             iconImage.sprite = drainageData.drainageIcon;
+            iconImage.enabled = true;
         }
         if (nameText != null && drainageData != null)
         {

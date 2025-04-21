@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <drainageName>k__BackingField: Pouzzolane
   drainageMaterial: {fileID: 2100000, guid: dce8543f2e948b14e92a129927f3de18, type: 2}
-  drainageIcon: {fileID: 0}
+  drainageIcon: {fileID: 21300000, guid: bf13ac549903f534888e1725b25b2ca0, type: 3}

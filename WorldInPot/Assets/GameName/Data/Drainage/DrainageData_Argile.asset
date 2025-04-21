@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <drainageName>k__BackingField: Argile
   drainageMaterial: {fileID: 2100000, guid: 3fc389b44678b494c823c40aa13fb77b, type: 2}
-  drainageIcon: {fileID: 0}
+  drainageIcon: {fileID: 21300000, guid: 5a3e3392a3d491e4589867164b913512, type: 3}

@@ -12,6 +12,10 @@ public class StepDependentButton : MonoBehaviour
         TerrariumBuilder.Instance.onProgressChanged += UpdateInteractability;
         UpdateInteractability(TerrariumBuilder.Instance.creationProgress);
     }
+    private void OnEnable()
+    {
+        UpdateInteractability(TerrariumBuilder.Instance.creationProgress);
+    }
 
     private void OnDestroy()
     {

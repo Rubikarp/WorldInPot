@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f485e716681bde34bbe0c54c4cb724d8, type: 3}
+  m_Name: VegetationData_Tetraphylla
+  m_EditorClassIdentifier: 
+  <vegetationName>k__BackingField: Tetraphylla
+  vegetationPrefab: {fileID: 4268481815262454868, guid: 41fc54975c99193469257efb514f23fe, type: 3}
+  vegetationType: 0
+  vegetationIcon: {fileID: 21300000, guid: a130790abcc0aee47b5e84b744b01d17, type: 3}
+  vegetationMesh: {fileID: -2816428642282943190, guid: b8d545cabf47cac47befad12066b567d, type: 3}

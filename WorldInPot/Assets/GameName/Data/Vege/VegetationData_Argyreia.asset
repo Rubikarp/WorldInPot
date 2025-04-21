@@ -15,5 +15,5 @@ MonoBehaviour:
   <vegetationName>k__BackingField: Argyreia
   vegetationPrefab: {fileID: 4268481815262454868, guid: 65eb341c25561b846a78f56e64be99ae, type: 3}
   vegetationType: 0
-  vegetationIcon: {fileID: 0}
+  vegetationIcon: {fileID: 21300000, guid: cbfaf3b7b6814bb4ea6f61b6678762f5, type: 3}
   vegetationMesh: {fileID: -534424222701536476, guid: df3a0d446564746459dbdbcc6dcad1dc, type: 3}

@@ -79,7 +79,6 @@ public class TerrariumBuilder : SingletonMono<TerrariumBuilder>
         }
         ProgressToNextStep();
     }
-
     public void SelectDrainage(DrainageData drainageData)
     {
         currentDrainage = drainageData;
@@ -90,7 +89,6 @@ public class TerrariumBuilder : SingletonMono<TerrariumBuilder>
         }
         ProgressToNextStep();
     }
-
     public void SelectFilter(FilterData filterData)
     {
         currentFilter = filterData;
@@ -101,7 +99,6 @@ public class TerrariumBuilder : SingletonMono<TerrariumBuilder>
         }
         ProgressToNextStep();
     }
-
     public void SelectSubstrat(SubstratData substratData)
     {
         currentSubstrat = substratData;
@@ -113,6 +110,20 @@ public class TerrariumBuilder : SingletonMono<TerrariumBuilder>
 
         SelectSubstratShape(substratShape);
         ProgressToNextStep();
+    }
+    public void SelectSubstratShape(ESubstratShape shape)
+    {
+        substratShape = shape;
+        if (substratMesh != null && substratShapeMeshes != null)
+        {
+            substratMesh.mesh = substratShapeMeshes[(int)shape];
+            if (substratMeshCollider != null)
+            {
+                substratMeshCollider.sharedMesh = null;
+                substratMeshCollider.sharedMesh = substratShapeMeshes[(int)shape];
+                Physics.SyncTransforms();
+            }
+        }
     }
 
     private void ProgressToNextStep()
@@ -155,21 +166,6 @@ public class TerrariumBuilder : SingletonMono<TerrariumBuilder>
         }
     }
 
-    public void SelectSubstratShape(ESubstratShape shape)
-    {
-        substratShape = shape;
-        if (substratMesh != null && substratShapeMeshes != null)
-        {
-            substratMesh.mesh = substratShapeMeshes[(int)shape];
-            if (substratMeshCollider != null)
-            {
-                substratMeshCollider.sharedMesh = null;
-                substratMeshCollider.sharedMesh = substratShapeMeshes[(int)shape];
-                Physics.SyncTransforms();
-            }
-        }
-    }
-
     public void AddVegetation(VegetationData vegetationData, Vector3 position, Quaternion rotation)
     {
         currentVegetation.Add(vegetationData);
@@ -185,6 +181,21 @@ public class TerrariumBuilder : SingletonMono<TerrariumBuilder>
         currentStructureObject.Add(decorationObject);
     }
 
+    public void RemoveObject(GameObject objectToRemove)
+    {
+        if (currentVegetationObject.Contains(objectToRemove))
+        {
+            RemoveVegetation(objectToRemove);
+        }
+        else if (currentStructureObject.Contains(objectToRemove))
+        {
+            RemoveDecoration(objectToRemove);
+        }
+        else
+        {
+            Debug.LogError($"Tried to remove an object that is not in the terrarium: {objectToRemove.name}");
+        }
+    }
     public void RemoveVegetation(GameObject vegetationObject)
     {
         if (!currentVegetationObject.Contains(vegetationObject))
@@ -272,5 +283,12 @@ public class TerrariumBuilder : SingletonMono<TerrariumBuilder>
         currentSubstrat = null;
 
         creationProgress = ETerrariumStep.Bocal;
+    }
+    [Button("Start From Scratch")]
+    public void StartFromScratch()
+    {
+        ClearAllElements();
+        creationProgress = ETerrariumStep.Bocal;
+        gameHandler.DeselectObject();
     }
 }

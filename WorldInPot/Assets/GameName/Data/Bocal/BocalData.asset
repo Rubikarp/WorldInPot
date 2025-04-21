@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <bocalName>k__BackingField: BasicBocal
   bocalMesh: {fileID: 8834630162086905559, guid: 671cc3a80211046428f8d47d7e009b79, type: 3}
-  bocalSprite: {fileID: 0}
+  bocalSprite: {fileID: 21300000, guid: 8e867e987c5ff67418450dcbbb2dfff8, type: 3}
