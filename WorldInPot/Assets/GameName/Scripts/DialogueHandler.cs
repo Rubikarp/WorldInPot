@@ -4,29 +4,24 @@ using Ink.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
+using System.Text;
 
 public class DialogueHandler : MonoBehaviour
 {
     public static event Action<Story> OnCreateStory;
     public static event Action OnStoryEnd;
+    private Story story;
 
     [Header("Story Configuration")]
     public TextAsset inkJSONAsset = null;
 
     [Header("UI References")]
-    [SerializeField, Required]
-    private RectTransform dialogueArea = null;
-    
-    [SerializeField, Required]
-    private RectTransform choiceArea = null;
+    [SerializeField] private RectTransform dialogueArea = null;
+    [SerializeField] private RectTransform choiceArea = null;
 
     [Header("UI Prefabs")]
-    [SerializeField, Required]
-    private TextMeshProUGUI textPrefab = null;
-    
-    [SerializeField, Required]
-    private Button buttonPrefab = null;
-    private Story story;
+    [SerializeField] private TextMeshProUGUI textPrefab = null;
+    [SerializeField] private Button buttonPrefab = null;
 
     [Button]
     public void StartStory()
@@ -58,19 +53,20 @@ public class DialogueHandler : MonoBehaviour
     {
         if (story == null) return;
 
+        ClearUI();
         DisplayStoryText();
         DisplayChoices();
     }
 
     private void DisplayStoryText()
     {
+        StringBuilder sb = new StringBuilder();
         while (story.canContinue)
         {
-            string text = story.Continue().Trim();
-            CreateDialogueText(text);
+            sb.AppendLine(story.Continue().Trim());
         }
+        CreateDialogueText(sb.ToString());
     }
-
     private void DisplayChoices()
     {
         if (story.currentChoices.Count > 0)
@@ -114,19 +110,28 @@ public class DialogueHandler : MonoBehaviour
         if (story == null) return;
 
         story.ChooseChoiceIndex(choice.index);
+
+
         RefreshView();
     }
 
     private void ClearUI()
     {
-        if (choiceArea != null)
-        {
-            choiceArea.DeleteChildrens();
-        }
-        
+        ClearChoices();
+        ClearDialogue();
+    }
+    private void ClearDialogue()
+    {
         if (dialogueArea != null)
         {
             dialogueArea.DeleteChildrens();
+        }
+    }
+    private void ClearChoices()
+    {
+        if (choiceArea != null)
+        {
+            choiceArea.DeleteChildrens();
         }
     }
 }

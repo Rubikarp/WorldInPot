@@ -60,7 +60,7 @@ public class ClientManager : SingletonMono<ClientManager>
     {
         if (currentClientIndex >= clients.Length)
         {
-            currentClientIndex = clients.Length;
+            currentClientIndex = clients.Length - 1;
             StartClientTalk();
             return;
         }

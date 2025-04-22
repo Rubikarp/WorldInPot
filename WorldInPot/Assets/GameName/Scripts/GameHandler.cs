@@ -189,7 +189,7 @@ public class GameHandler : SingletonMono<GameHandler>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f, placementLayerMask) && 
+        if (Physics.Raycast(ray, out hit, 100f, placementLayerMask) &&
             Vector3.Dot(Vector3.up, hit.normal) > Mathf.Cos(80 * Mathf.Deg2Rad))
         {
             previewObject.transform.position = hit.point;
@@ -226,7 +226,7 @@ public class GameHandler : SingletonMono<GameHandler>
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f, placementLayerMask) && 
+        if (Physics.Raycast(ray, out hit, 100f, placementLayerMask) &&
             Vector3.Dot(Vector3.up, hit.normal) > Mathf.Cos(80 * Mathf.Deg2Rad))
         {
             SelectedObject.transform.position = hit.point;
@@ -249,25 +249,29 @@ public class GameHandler : SingletonMono<GameHandler>
             isRotating = true;
             rotationStartPosition = Input.mousePosition;
             rotationStartRotation = SelectedObject.transform.rotation;
+
+            //Cpompare screen screen pos disttance between object and mouse
+            if(Vector2.Distance(Input.mousePosition,Camera.main.WorldToScreenPoint(SelectedObject.transform.position)) > 300)
+            {
+                SetEditMode(EEditMode.None);
+            }
         }
         else if (Input.GetMouseButton(0) && isRotating)
         {
             Vector3 currentMousePosition = Input.mousePosition;
             Vector3 mouseDelta = currentMousePosition - rotationStartPosition;
 
-            Vector3 cameraRight = Camera.main.transform.right;
-            Vector3 cameraUp = Camera.main.transform.up;
+            Vector3 dragPosition = (Camera.main.transform.right * mouseDelta.x) + (Camera.main.transform.forward * mouseDelta.y);
+            Vector3 rotationAxis = Vector3.Cross(Camera.main.transform.up, dragPosition);
 
-            Quaternion rotationX = Quaternion.AngleAxis(-mouseDelta.y * rotationSensitivity, cameraRight);
-            Quaternion rotationY = Quaternion.AngleAxis(mouseDelta.x * rotationSensitivity, cameraUp);
-
-            SelectedObject.transform.rotation = rotationStartRotation * rotationY * rotationX;
+            SelectedObject.transform.rotation = rotationStartRotation;
+            SelectedObject.transform.Rotate(rotationAxis, dragPosition.magnitude * rotationSensitivity, Space.World);
         }
         else if (Input.GetMouseButtonUp(0))
         {
             rotationStartRotation = SelectedObject.transform.rotation;
             isRotating = false;
-            SetEditMode(EEditMode.None);
+            //SetEditMode(EEditMode.None);
         }
     }
 
@@ -282,7 +286,7 @@ public class GameHandler : SingletonMono<GameHandler>
             {
                 GameObject clickedObject = hit.collider.gameObject;
 
-                if (terrariumBuilder != null && 
+                if (terrariumBuilder != null &&
                     (terrariumBuilder.currentVegetationObject.Contains(clickedObject) ||
                      terrariumBuilder.currentStructureObject.Contains(clickedObject)))
                 {
@@ -308,7 +312,6 @@ public class GameHandler : SingletonMono<GameHandler>
             DeselectObject();
         }
     }
-
     public void DeselectObject() => SetSelectedObject(null);
 
     private void SetSelectedObject(GameObject obj)
@@ -319,7 +322,6 @@ public class GameHandler : SingletonMono<GameHandler>
             onSelectionChange?.Invoke(SelectedObject);
         }
     }
-
     private void HandleClientModeInput()
     {
         //It's mainly UI
